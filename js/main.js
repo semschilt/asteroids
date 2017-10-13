@@ -1,36 +1,40 @@
-var canvas = (function (){
+var game = (function(){
+    
+    var gameObjects;
+    var canvasElement;
+    var ctx;
 
-    // Get element
-    var element = document.getElementById('canvas');
-
-    //define context
-    var ctx = element.getContext('2d');
-
-    //update canvas objects
-    function draw(){
-        ship.draw(ctx);
+    function init(){
+        canvasElement = document.getElementById('canvas');
+        ctx = canvasElement.getContext('2d'); 
+        gameObjects = [];
     }
 
-    return {draw};
-})();
+    function run(){
+        for (var i = 0; i < gameObjects.length; i++) {
+            gameObjects[i].draw(ctx);
+            
+        }
+    }
 
+    function createShip(){
+        var x = Math.floor(Math.random()*641);
+        var y = Math.floor(Math.random()*481);
+        gameObjects.push(new Ship(x, y));
+        run()
+    }
 
-var ship = (function(){
-    var centerX = 64;
-    var centerY = 64;
-
-    var radius = 16;
-
-    function draw(ctx){
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-        ctx.fill();
-        ctx.strokeStyle = '#fff';
-        ctx.stroke();
-    }  
-    return {
-        draw: draw,
-    };
-})();
-
+    function createMeteor(){
+        var x = Math.floor(Math.random()*641);
+        var y = Math.floor(Math.random()*481);
+        gameObjects.push(new Meteor(x, y));
+        run()
+    }
     
+    return{
+        init,
+        run,
+        createShip,
+        createMeteor,
+    }
+})();
