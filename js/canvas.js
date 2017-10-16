@@ -6,7 +6,7 @@
     
         function draw(ctx){
             ctx.beginPath();
-            ctx.arc(_x, _y, _radius, 0, 2 * Math.PI, false);
+            ctx.arc(_x, _y, _radius, 70, 0 , Math.PI, false);
             ctx.fill();
             ctx.strokeStyle = '#fff';
             ctx.stroke();
@@ -21,7 +21,7 @@
         var _y = y;
 
         function draw(ctx){
-            var i = 0.2;
+            var i = 0.2; //0.2, 0.4 and 0.8
 
             ctx.beginPath();
             ctx.moveTo(170 * i, 80 * i);
@@ -35,7 +35,7 @@
             // complete custom shape
             ctx.closePath();
             ctx.lineWidth = 5;
-            ctx.strokeStyle = 'blue';
+            ctx.strokeStyle = 'white';
             ctx.stroke();
         }
         return{
