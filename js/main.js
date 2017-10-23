@@ -3,53 +3,60 @@ var game = (function(){
     var gameObjects;
     var canvasElement;
     var ctx;
-    var FPS = 30;
+    var lastRender = 0;
 
     function init(){
         canvasElement = document.getElementById('canvas');
         ctx = canvasElement.getContext('2d'); 
         gameObjects = [];
-        setInterval(gameLoop, 1000/FPS);
+        loop();
+        createMeteor();
+        createShip();
     }
 
-    function gameLoop(){
-        // Update (changes to objects on screen)
-        // Draw (render objects to screen)
+    function update(progress){
+        // Update the state of the world for the elapsed time since last render
+        // gameObjects = [];
+        // createShip();
+        // createMeteor();
     }
 
-    function update(){
-        animation = window.requestAnimationFrame(update);
-            // if(){
-            //     // 
-            // }else{
-            //     //load objects in.
-            // }
-    }
+    function draw(){
+        // Draw the state of the world
+        ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
-    function run(){
         for (var i = 0; i < gameObjects.length; i++) {
-            gameObjects[i].draw(ctx);
-            
+            gameObjects[i].draw(ctx);       
         }
     }
 
+    function loop(timestamp){
+        // Update (changes to objects on screen)
+        // Draw (render objects to screen)
+        var progress = timestamp - lastRender;
+
+        update(progress);
+        draw();
+
+        lastRender = timestamp;
+        window.requestAnimationFrame(loop);
+    }
+    
     function createShip(){
         var x = Math.floor(Math.random()*641);
         var y = Math.floor(Math.random()*481);
         gameObjects.push(new Ship(x, y));
-        run()
     }
 
     function createMeteor(){
         var x = Math.floor(Math.random()*641);
         var y = Math.floor(Math.random()*481);
         gameObjects.push(new Meteor(x, y));
-        run()
     }
     
     return{
         init,
-        run,
+        loop,
         createShip,
         createMeteor,
     }
