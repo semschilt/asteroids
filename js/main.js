@@ -56,8 +56,5 @@ var game = (function(){
     
     return{
         init,
-        loop,
-        createShip,
-        createMeteor,
     }
 })();

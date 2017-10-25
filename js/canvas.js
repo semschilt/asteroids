@@ -1,4 +1,4 @@
-    var Ship = function(x, y){
+    var Meteor = function(x, y){
         var _x = x;
         var _y = y;
     
@@ -16,27 +16,27 @@
         };
     };
 
-    var Meteor = function(x, y){
+    var Ship = function(x, y){
         var _x = x;
         var _y = y;
 
         function draw(ctx){
-            var i = 0.2; //0.2, 0.4 and 0.8
-
-            ctx.beginPath();
-            ctx.moveTo(170 * i, 80 * i);
-            ctx.bezierCurveTo(130 * i, 100 * i, 130 * i, 150 * i, 230 * i,150 * i);
-            ctx.bezierCurveTo(250 * i, 180 * i, 320 * i, 180 * i, 340* i, 150 * i);
-            ctx.bezierCurveTo(420 * i, 150 * i, 420 * i, 120 * i, 390* i, 100 * i);
-            ctx.bezierCurveTo(430 * i, 40 * i, 370 * i, 30 * i, 340* i, 50 * i);
-            ctx.bezierCurveTo(320 * i, 5 * i, 250 * i, 20 * i, 250* i, 50 * i);
-            ctx.bezierCurveTo(200 * i, 5 * i, 150 * i, 20 * i, 170* i, 80 * i);
-      
-            // complete custom shape
-            ctx.closePath();
-            ctx.lineWidth = 5;
-            ctx.strokeStyle = 'white';
-            ctx.stroke();
+            
+            ctx.save()
+            //   ctx.translate(state.position.x, state.position.y)
+            //   ctx.rotate((Math.PI/180) * state.rotation)
+            
+              ctx.strokeStyle = 'white'
+              ctx.lineWidth = 2
+              ctx.beginPath ()
+              ctx.moveTo(0, 0)
+              ctx.lineTo(10, 10)
+              ctx.lineTo(0, -20)
+              ctx.lineTo(-10, 10)
+              ctx.lineTo(0, 0)
+              ctx.closePath()
+              ctx.stroke()
+              ctx.restore()
         }
         return{
             draw: draw,
