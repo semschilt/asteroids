@@ -1,3 +1,5 @@
+'use strict';
+
 var game = (function(){
     
     var gameObjects;
@@ -7,21 +9,33 @@ var game = (function(){
 
     function init(){
         var canvasElement = document.getElementById('canvas');
+
+        canvasElement.addEventListener('keypress', keyPressHandler);
+
         state = new State(canvasElement);
         gameObjects = [];
-        loop();
+
         createMeteor();
         createShip();
         createShip();
         createShip();
         createShip();
         createShip();
+
+        loop();
+    }
+
+    function keyPressHandler(ev){
+        console.log(ev.code);
+
+        console.log(state.handleKeyPresses(ev.code))
     }
 
     function update(deltaTime){
         for (var i = 0; i < gameObjects.length; i++) {
             gameObjects[i].update(deltaTime);
         }
+        state.resetKeyState();
     }
 
     function draw(){
@@ -31,8 +45,8 @@ var game = (function(){
 
         for (var i = 0; i < gameObjects.length; i++) {
             var fillStyle = ctx.fillStyle;
-            gameObjects[i].draw(); 
-            ctx.fillStyle = fillStyle;      
+            gameObjects[i].draw();
+            ctx.fillStyle = fillStyle;
         }
     }
 

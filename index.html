@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <canvas id="canvas" width="640" height="480"></canvas>
+    <canvas id="canvas" tabindex="1" width="640" height="480"></canvas>
     
-    
+    <input type="text" id="test">
 
     <script src="js/canvas.js"></script>    
     <script src="js/state.js"></script>
@@ -16,6 +16,16 @@
 
     <script>
         game.init();
+
+        document.getElementById("test").addEventListener('keypressed', function(ev){
+            console.groupCollapsed();
+                console.log("charCode: ", ev.charCode);
+                console.log("code: ", ev.code);
+                console.log("key: ", ev.key);
+                console.log("keyCode: ", ev.keyCode);
+                console.log("which: ", ev.which);
+            console.groupEnd();
+        });
     </script>
 </body>
 </html>
